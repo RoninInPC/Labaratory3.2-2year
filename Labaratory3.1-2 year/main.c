@@ -1,7 +1,8 @@
 #include"function.h"
 #include"mainFunction.h"
+#include<stdio.h>
 int main(int argc, char* argv[]) {
-	printf("Choose Print. Print Number. Number '1' - files 'input.txt', 'input1.txt'. Number '2' - for keyboard. Number '3' - for main");
+	printf("Choose Print. Print Number. Number '1' - files 'input.txt', 'input1.txt'. Number '2' - for keyboard. Number '3' - for main\n");
 	int exc;
 	scanf_s("%d", &exc);
 	BigInt c;
@@ -28,10 +29,11 @@ int main(int argc, char* argv[]) {
 	}
 	
 	BigInt d = SumBigInt(&c, &c1);PrintBigInt(&d);
-	BigInt d1 = DifBigInt(&c, &c1);PrintBigInt(&d1);
+	BigInt d1 = DifBigInt(&c, &c1); PrintBigInt(&d1);
 	BigInt d2 = PrBigInt(&c, &c1);
 	PrintBigInt(&d2);
 	BigInt d3 = DivBigInt(&c, &c1);
 	PrintBigInt(&d3);
+	system("pause");
 	return 0;
 }
