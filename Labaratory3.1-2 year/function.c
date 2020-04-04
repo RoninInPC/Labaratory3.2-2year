@@ -102,50 +102,37 @@ BigInt PrBigInt(BigInt* a, BigInt* b) {
 	return Ans;
 }
 BigInt DivBigInt(BigInt* a, BigInt* b) {
-	BigInt Ans;
-	BigInt E;
-	E.Size = 1;
-	int* Arr = (int*)malloc(E.Size*sizeof(int));
-	Arr[0] = 1;
-	Arr = (int*)realloc(Arr, sizeof(int));
-	E.Sign = 0;
-	E.Arr = Arr;
-	int* Arr1 = (int*)malloc(E.Size * sizeof(int));
-	Arr1 = (int*)realloc(Arr1, sizeof(int));
-	Arr1[0] = 0;
-	Ans.Sign = 0;
-	Ans.Size = 1;
-	Ans.Arr = Arr1;
-	int i = 0;
-	BigInt E1 = E;
+	if (MaxAbsBigInt(a, b) == 2) {
+		return ZeroBigInt();
+	}
+	BigInt Copy = *a;
+	BigInt Ans = ZeroBigInt();
+	int Size = a->Size - b->Size+1;
+	int* Arr = (int*)malloc(Size * sizeof(int));
+	int k = 9;
 	while (1) {
-		BigInt IF = PrBigInt(&Ans, b);
-		Ans = SumBigInt(&Ans, &E);
-		if (i == 10) {
-			E = SumBigInt(&E, &E);
-			i = 0;
+		Arr[Size - 1] = k;
+		for (int i = 0; i < Size - 1; i++) {
+			Arr[i] = 0;
 		}
-		if (MaxAbsBigInt(a, &IF) == 2) {
-			break;
+		BigInt K;
+		K.Arr = Arr;
+		K.Sign = 0;
+		K.Size = Size;
+		BigInt IF = PrBigInt(&K, b);
+		if (MaxAbsBigInt(&IF, &Copy) == 1) {
+			k--;
+			Arr[Size - 1] = k;
 		}
-		i++;
+		else
+		{
+			Copy = DifBigInt(&Copy, &IF);
+			Ans = SumBigInt(&Ans, &K);
+			k = 9;
+			Size--;
+			if (Size+1 < b->Size) break;
+			Arr = (int*)realloc(Arr, Size * sizeof(int));
+		}
 	}
-	while (1) {
-		BigInt IF = PrBigInt(&Ans, b);
-		if (MaxAbsBigInt(a, &IF) == 1) {
-			break;
-		}
-		Ans = DifBigInt(&Ans, &E1);
-	}
-	int t = 0;
-	for (int i = Ans.Size - 1; i > 0; i--) {
-		if (Arr[i] == 0) {
-			t++;
-		}
-		else break;
-	}
-	Ans.Size -= t;
-	Arr = realloc(Arr, Ans.Size * sizeof(int));
-	Ans.Sign = (a->Sign + b->Sign) % 2;
 	return Ans;
 }

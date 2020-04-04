@@ -119,3 +119,23 @@ int Parity(BigInt* a, BigInt* b) {
 	}
 	return 1;
 }
+BigInt ZeroBigInt() {
+	int* Arr = (int*)malloc(sizeof(int));
+	Arr[0] = 0;
+	Arr = (int*)realloc(Arr, sizeof(int));
+	BigInt Ans;
+	Ans.Arr = Arr;
+	Ans.Sign = 0;
+	Ans.Size = 1;
+	return Ans;
+}
+BigInt OneBigInt() {
+	int* Arr = (int*)malloc(sizeof(int));
+	Arr[0] = 1;
+	Arr = (int*)realloc(Arr, sizeof(int));
+	BigInt Ans;
+	Ans.Arr = Arr;
+	Ans.Sign = 0;
+	Ans.Size = 1;
+	return Ans;
+}

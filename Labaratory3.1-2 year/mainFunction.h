@@ -7,4 +7,6 @@ BigInt ScanBigIntF(char* FileName);
 int MaxAbsBigInt(BigInt* a, BigInt* b);
 int Parity(BigInt* a, BigInt* b);
 void PrintBigInt(BigInt* a);
+BigInt ZeroBigInt();
+BigInt OneBigInt();
 #endif
